@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <curses.h>
+#include "slides.h"
 
 
-
-#define SIZE 4
-#define PRIME 2
-#define EMPTY 0
+// #define SIZE 4
+// #define PRIME 2
+// #define EMPTY 0
 
 void initialize();
 int ran();
@@ -20,48 +20,29 @@ WINDOW * mainwin;
 int main(){
 
   	
-	int i=0/*ROW*/, j=0/*COL*/, k;
 	srand(time(NULL));
 	initialize();
-
+	placeNum();
 	while(1){
-		placeNum();
 		clear();
 		refresh();
 		printBoard();
 		int keyPress = getch();
 		switch(keyPress){
 			case KEY_RIGHT:
-
+				if(slideRight(board)) continue;
 				break;
 			case KEY_LEFT:
-				
-				for (i = 0; i < SIZE; i++){
-					int temp[]= {0,0,0,0};
-					k=0;
-					for (j = 0; j < SIZE; j++){
-						if (board[i][j] == EMPTY)
-							continue;
-						if (temp[k] == 0)
-							temp[k] = board[i][j];
-						else if(temp[k] == board[i][j]){
-							temp[k] = temp[k]*PRIME;
-							k++;
-						}
-						else{
-							k++;
-							temp[k] = board[i][j];
-						}
-					}
-					for(k = 0 ; k < SIZE ; k++)
-						board[i][k] = temp[k];
-				}
+				if(slideLeft(board)) continue;
 				break;
 			case KEY_UP:
+				if(slideUp(board)) continue;
 				break;
 			case KEY_DOWN:
+				if(slideDown(board)) continue;
 				break;
 		}
+		placeNum();
 	}
 
     getch();
@@ -102,8 +83,32 @@ void printBoard(){
 	int i,j;
 	for (i = 0; i < SIZE; ++i){
 		for (j = 0; j < SIZE; ++j){
-			printf("%d\t", board[i][j]);
+			printw("%d\t", board[i][j]);
 		}
-		printf("\n\n");
+		printw("\n\n");
 	}
 }
+
+// void slideRight(){
+// 	int i/*ROW*/, j/*COL*/, k/*temp*/;
+// 	for (i = 0; i < SIZE; i++){
+// 		int temp[]= {0,0,0,0};
+// 		k=SIZE-1;
+// 		for (j = SIZE-1; j >= 0; j--){
+// 			if (board[i][j] == EMPTY)
+// 				continue;
+// 			if (temp[k] == 0)
+// 				temp[k] = board[i][j];
+// 			else if(temp[k] == board[i][j]){
+// 				temp[k] = temp[k]*PRIME;
+// 				k--;
+// 			}	
+// 			else{
+// 				k--;
+// 				temp[k] = board[i][j];
+// 			}
+// 		}
+// 		for(k = 0 ; k < SIZE ; k++)
+// 			board[i][k] = temp[k];
+// 	}
+// }
