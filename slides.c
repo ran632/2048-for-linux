@@ -1,13 +1,11 @@
 #include "slides.h"
 
-void printTest(){
-
-}
 int slideLeft(int board[][SIZE]){
 	int stuck = 1;
 	int i/*ROW*/, j/*COL*/, k/*temp*/;
+
 	for (i = 0; i < SIZE; i++){
-		int temp[]= {0,0,0,0};
+		for (k = 0; k < SIZE; k++){temp[k] = EMPTY;}
 		k=0;
 		for (j = 0; j < SIZE; j++){
 			if (board[i][j] == EMPTY)
@@ -35,7 +33,7 @@ int slideRight(int board[][SIZE]){
 	int stuck = 1;
 	int i/*ROW*/, j/*COL*/, k/*temp*/;
 	for (i = 0; i < SIZE; i++){
-		int temp[]= {0,0,0,0};
+		for (k = 0; k < SIZE; k++){temp[k] = EMPTY;}
 		k=SIZE-1;
 		for (j = SIZE-1; j >= 0 ; j--){
 			if (board[i][j] == EMPTY)
@@ -63,7 +61,7 @@ int slideDown(int board[][SIZE]){
 	int stuck = 1;
 	int i/*ROW*/, j/*COL*/, k/*temp*/;
 	for (i = 0; i < SIZE; i++){
-		int temp[]= {0,0,0,0};
+		for (k = 0; k < SIZE; k++){temp[k] = EMPTY;}
 		k=SIZE-1;
 		for (j = SIZE-1; j >= 0 ; j--){
 			if (board[j][i] == EMPTY)
@@ -92,7 +90,7 @@ int slideUp(int board[][SIZE]){
 	int stuck = 1;
 	int i/*ROW*/, j/*COL*/, k/*temp*/;
 	for (i = 0; i < SIZE; i++){
-		int temp[]= {0,0,0,0};
+		for (k = 0; k < SIZE; k++){temp[k] = EMPTY;}
 		k=0;
 		for (j = 0; j < SIZE; j++){
 			if (board[j][i] == EMPTY)

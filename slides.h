@@ -9,4 +9,5 @@ int slideLeft(int board[][SIZE]);
 int slideRight(int board[][SIZE]);
 int slideDown(int board[][SIZE]);
 int slideUp(int board[][SIZE]);
-void printTest();
+
+int temp[SIZE];
