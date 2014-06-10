@@ -11,19 +11,17 @@ void placeNum();
 
 int board[SIZE][SIZE];
 WINDOW * mainwin;
+int score;
 
 int main(){
-
-  	//mainwin = newwin();
-	srand(time(NULL));
 	initialize();
 	placeNum();
 	while(1){
 		clear();
 		refresh();
-		printBoard(board);
+		printBoard(board, score);
 		int keyPress = getch();
-		if(!slide(board, keyPress))
+		if(!slide(board, keyPress, &score))
 			placeNum();
 	}
 
@@ -41,7 +39,7 @@ void initialize(){
 			board[i][j] = EMPTY;
 		}
 	}
-
+	srand(time(NULL));
 	mainwin = initscr();
 	noecho();
   	keypad(mainwin, TRUE);

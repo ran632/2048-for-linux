@@ -1,7 +1,6 @@
 
 #include "boardDraw.h"
-#define DARK_KHAKI 8
-void printBoard(int board[][SIZE]){ 
+void printBoard(int board[][SIZE],int score){ 
 	start_color(); 
 	
  	drawBlock(0,0,(SIZE+1)*(VER_BORDER)+(SIZE)*(VER_BLOCK),
@@ -10,16 +9,11 @@ void printBoard(int board[][SIZE]){
  	move(0,0);
  	
 	int i,j;
-	for (i = 0; i < SIZE; ++i){
-		for (j = 0; j < SIZE; ++j){
+	for (i = 0; i < SIZE; ++i)
+		for (j = 0; j < SIZE; ++j)
 			drawBlock(getBlockX(j),getBlockY(i),VER_BLOCK,HOR_BLOCK,board[i][j],
 				Logn(board[i][j],PRIME)%(COLORS-1));
-
-		}
-		
-	}
-	move(0,50);
-	printw(" ");
+	drawScore(score);
 
 }
 
@@ -54,4 +48,11 @@ unsigned int Logn(unsigned int n, unsigned int r){
 	if(r == EMPTY)
 		return 0;
    return (n > r-1)? 1 + Logn(n/r, r): 0;
+}
+
+void drawScore(int score){
+	move((SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK),0);
+	printw("SCORE:");
+	move((SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK)+1,0);	
+	printw("%d",score);
 }
