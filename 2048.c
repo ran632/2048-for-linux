@@ -4,14 +4,16 @@
 #include <curses.h>
 #include "slides.h"
 #include "boardDraw.h"
+#include "fscore.h"
 
 void initialize();
 int ran();
 void placeNum();
+void checkHighScore();
 
 int board[SIZE][SIZE];
 WINDOW * mainwin;
-int score;
+int score[2];
 
 int main(){
 	initialize();
@@ -21,8 +23,9 @@ int main(){
 		refresh();
 		printBoard(board, score);
 		int keyPress = getch();
-		if(!slide(board, keyPress, &score))
+		if(!slide(board, keyPress, score))
 			placeNum();
+		checkHighScore();
 	}
 
     getch();
@@ -43,7 +46,10 @@ void initialize(){
 	mainwin = initscr();
 	noecho();
   	keypad(mainwin, TRUE);
-
+  	if (loadScore() == -1){
+  		saveScore(0);
+  	}
+  	score[1] = loadScore();
 }
 
 int ran(){
@@ -60,4 +66,10 @@ void placeNum(){
 		board[i][j] = PRIME;
 	else
 		board[i][j] = PRIME*PRIME;
+}
+void checkHighScore(){
+	if (score[0] > score[1]){
+		score[1] = score[0];
+		saveScore(score[0]);
+	}
 }

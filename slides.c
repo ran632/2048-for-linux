@@ -17,7 +17,7 @@ int slide(int board[][SIZE], int SIDE, int *score){
 				else{
 					if(temp[k] == board[x][y]){
 						temp[k] = temp[k]*PRIME;
-						*score = *score + temp[k];
+						score[0] = score[0] + temp[k];
 						k = (SIDE == KEY_UP || SIDE == KEY_LEFT) ? k+1 : k-1;
 					}	
 					else{

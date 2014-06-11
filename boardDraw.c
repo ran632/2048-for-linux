@@ -1,6 +1,6 @@
 
 #include "boardDraw.h"
-void printBoard(int board[][SIZE],int score){ 
+void printBoard(int board[][SIZE],int *score){ 
 	start_color(); 
 	
  	drawBlock(0,0,(SIZE+1)*(VER_BORDER)+(SIZE)*(VER_BLOCK),
@@ -50,9 +50,9 @@ unsigned int Logn(unsigned int n, unsigned int r){
    return (n > r-1)? 1 + Logn(n/r, r): 0;
 }
 
-void drawScore(int score){
+void drawScore(int *score){
 	move((SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK),0);
-	printw("SCORE:");
+	printw("SCORE: %d", score[0]);
 	move((SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK)+1,0);	
-	printw("%d",score);
+	printw("HIGH SCORE:%d",score[1]);
 }
