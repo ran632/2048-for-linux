@@ -1,6 +1,9 @@
 
 #include "boardDraw.h"
 void printBoard(int board[][SIZE],int *score){ 
+
+	clear();
+	refresh();
 	start_color(); 
 	
  	drawBlock(0,0,(SIZE+1)*(VER_BORDER)+(SIZE)*(VER_BLOCK),
@@ -14,7 +17,7 @@ void printBoard(int board[][SIZE],int *score){
 			drawBlock(getBlockX(j),getBlockY(i),VER_BLOCK,HOR_BLOCK,board[i][j],
 				Logn(board[i][j],PRIME)%(COLORS-1));
 	drawScore(score);
-
+	curs_set(0);
 }
 
 void drawBlock(int x,int y,int width,int height,int num, int color){
@@ -29,7 +32,7 @@ void drawBlock(int x,int y,int width,int height,int num, int color){
   		}
  	}
  	if (num != EMPTY){
-	 	move(y+(HOR_BLOCK/2),x+(VER_BLOCK)/2);
+	 	move(y+(height/2),x+(width)/2);
 	 	printw("%d", num);
 	 }
  	attroff(COLOR_PAIR(color));
@@ -55,4 +58,26 @@ void drawScore(int *score){
 	printw("SCORE: %d", score[0]);
 	move((SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK)+1,0);	
 	printw("HIGH SCORE:%d",score[1]);
+}
+
+void springBlock(int board[][SIZE], int i, int j){
+	
+	drawBlock(getBlockX(j)+VER_BORDER,getBlockY(i)+HOR_BORDER,
+		VER_BLOCK-(2*VER_BORDER),
+		HOR_BLOCK-(2*HOR_BORDER),board[i][j],
+				Logn(board[i][j],PRIME)%(COLORS-1));
+	refresh();
+	usleep(SPRUNG_NUM_DELAY_TIME);
+}
+void drawGameOver(int score){
+	int boardWidth = (SIZE+1)*(VER_BORDER)+(SIZE)*(VER_BLOCK),
+		boardHeight = (SIZE+1)*(HOR_BORDER)+(SIZE)*(HOR_BLOCK);
+
+	drawBlock(0,0,boardWidth,boardHeight,0,COLOR_WHITE);
+	
+	move(boardHeight/2,boardWidth/2 - 5);
+	init_pair(10, COLOR_WHITE , COLOR_BLACK);
+	printw("GAME OVER");
+	refresh();
+	sleep(4);
 }

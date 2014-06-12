@@ -1,31 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <curses.h>
-#include "slides.h"
-#include "boardDraw.h"
-#include "fscore.h"
-
-void initialize();
-int ran();
-void placeNum();
-void checkHighScore();
-
-int board[SIZE][SIZE];
-WINDOW * mainwin;
-int score[2];
+#include "2048.h"
 
 int main(){
 	initialize();
-	placeNum();
+
 	while(1){
-		clear();
-		refresh();
 		printBoard(board, score);
+		if(gameOver())break;
 		int keyPress = getch();
-		if(!slide(board, keyPress, score))
+		if(!slide(board, keyPress, score)){
+			printBoard(board, score);
 			placeNum();
+		}
 		checkHighScore();
+	
 	}
 
     getch();
@@ -42,6 +29,7 @@ void initialize(){
 			board[i][j] = EMPTY;
 		}
 	}
+	
 	srand(time(NULL));
 	mainwin = initscr();
 	noecho();
@@ -50,6 +38,11 @@ void initialize(){
   		saveScore(0);
   	}
   	score[1] = loadScore();
+  	printBoard(board, score);
+	springBlock(board, 0, 0);
+	sleep(1);
+	placeNum();
+	placeNum();
 }
 
 int ran(){
@@ -66,10 +59,32 @@ void placeNum(){
 		board[i][j] = PRIME;
 	else
 		board[i][j] = PRIME*PRIME;
+	springBlock(board, i, j);
+	
 }
 void checkHighScore(){
 	if (score[0] > score[1]){
 		score[1] = score[0];
 		saveScore(score[0]);
 	}
+}
+
+int gameOver(){
+	int i, j;
+	for (i = 0; i < SIZE; ++i){
+		for (j = 0; j < SIZE; ++j){
+			if (board[i][j] == EMPTY)
+				return 0;
+			if (i != SIZE-1)
+				if (board[i][j] == board[i+1][j])
+					return 0;
+			if (j != SIZE-1)
+				if (board[i][j] == board[i][j+1])
+					return 0;
+		}
+	}
+	refresh();
+	sleep(2);
+	drawGameOver(score[0]);
+	return 1;
 }

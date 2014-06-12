@@ -6,7 +6,7 @@
 	{
 		FILE *ptr_myfile;
 		
-		ptr_myfile=fopen("/tmp/tfe.dat","wb");
+		ptr_myfile=fopen("./tfe.dat","wb");
 		if (!ptr_myfile)
 		{
 			perror("Unable to open file!");
@@ -24,7 +24,7 @@
 	{
 		FILE *ptr_myfile;
 		int score;
-		ptr_myfile=fopen("/tmp/tfe.dat","rb");
+		ptr_myfile=fopen("./tfe.dat","rb");
 		if (!ptr_myfile)
 		{
 			perror("Unable to open file!");
