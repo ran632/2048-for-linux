@@ -1,21 +1,20 @@
 #include "2048.h"
 
 int main(){
-	initialize();
-
 	while(1){
-		printBoard(board, score);
-		if(gameOver())break;
-		int keyPress = getch();
-		if(!slide(board, keyPress, score)){
+	initialize();
+		while(1){
 			printBoard(board, score);
-			placeNum();
+			if(gameOver())break;
+			if ('q' == (keyPress = getch()))break;
+			if(!slide(board, keyPress, score)){
+				printBoard(board, score);
+				placeNum();
+			}
+			checkHighScore();
 		}
-		checkHighScore();
-	
+		if ('q' == (keyPress = getch()))break;
 	}
-
-    getch();
 	endwin();
 	return 0;
 }
@@ -29,6 +28,8 @@ void initialize(){
 			board[i][j] = EMPTY;
 		}
 	}
+	score[0] = 0;
+  	score[1] = loadScore();
 	
 	srand(time(NULL));
 	mainwin = initscr();
@@ -37,7 +38,6 @@ void initialize(){
   	if (loadScore() == -1){
   		saveScore(0);
   	}
-  	score[1] = loadScore();
   	printBoard(board, score);
 	springBlock(board, 0, 0);
 	sleep(1);

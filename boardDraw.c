@@ -79,5 +79,9 @@ void drawGameOver(int score){
 	init_pair(10, COLOR_WHITE , COLOR_BLACK);
 	printw("GAME OVER");
 	refresh();
+	sleep(1);
+	move(boardHeight/2 + 1,boardWidth/2 - 20);
+	printw("press 'q' to exit, any other key to continue");
+	refresh();
 	sleep(4);
 }

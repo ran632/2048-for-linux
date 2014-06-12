@@ -17,3 +17,4 @@ int gameOver();
 int board[SIZE][SIZE];
 WINDOW * mainwin;
 int score[2];
+int keyPress;
