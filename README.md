@@ -15,5 +15,9 @@
 - C compiler
 - GNU/Linux
 
-### how to rum
-just download run the "run" file on your terminal!
+### Installation
+just download and run "2048":
+
+```
+./2048
+```
