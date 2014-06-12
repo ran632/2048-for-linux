@@ -1,3 +1,6 @@
+#ifndef SLIDES_H
+#define SLIDES_H
+
 #include <stdio.h>
 #include <ncurses.h>
 
@@ -8,3 +11,5 @@
 int slide(int board[][SIZE], int SIDE, int *score);
 
 int temp[SIZE];
+
+#endif

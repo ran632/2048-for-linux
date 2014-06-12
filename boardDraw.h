@@ -1,3 +1,6 @@
+#ifndef BOARD_DRAW_H
+#define BOARD_DRAW_H  
+
 #define _BSD_SOURCE
 
 #include <stdio.h>
@@ -22,3 +25,5 @@ unsigned int Logn(unsigned int n, unsigned int r);
 void drawScore(int *score);
 void springBlock(int board[][SIZE], int i, int j);
 void drawGameOver();
+
+#endif
