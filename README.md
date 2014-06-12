@@ -1,9 +1,10 @@
 2048.c
 ======
+#### The well known 2048 for Linux/UNIX/OSX Terminal
 
 ![screenshot](http://imageshack.com/a/img843/4002/w0vl.png)
 
-2048 for Linux terminal!
+
 
 ### Gameplay
 
@@ -14,10 +15,28 @@
 
 - C compiler
 - GNU/Linux
+- ncurses
 
-### Installation
-just download and run "2048":
+### Build
+Clone the project, or download the [Zip File](https://github.com/ran632/2048-for-linux/archive/master.zip).
+Navigate to the folder (if needed - extract the zip)
 
+to build & run:
+
+```shell
+$ make
+$ ./2048
 ```
-./2048
+
+### Clean 
+Thare are 2 ways to clean.
+
+- to delete only the build directory (keeping the executable) run:
+```shell
+$ make clean
+```
+
+- To delete all the build files and the Exec file:
+```shell
+$ make bclean
 ```
