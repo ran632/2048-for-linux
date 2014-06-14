@@ -83,5 +83,4 @@ void drawGameOver(int score){
 	move(boardHeight/2 + 1,boardWidth/2 - 12);
 	printw("'q' - exit | 'c' - new game");
 	refresh();
-	sleep(4);
 }
