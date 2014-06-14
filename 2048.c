@@ -1,20 +1,22 @@
 #include "2048.h"
 
 int main(){
+
 	while(1){
 	initialize();
 		while(1){
 			printBoard(board, score);
 			if(gameOver())break;
-			if ('q' == (keyPress = getch()))break;
+			if ('q' == (keyPress = getch()))goto endSession;
 			if(!slide(board, keyPress, score)){
 				printBoard(board, score);
-				placeNum();
+				placeNum();	
 			}
 			checkHighScore();
 		}
 		if ('q' == (keyPress = getch()))break;
 	}
+	endSession:
 	endwin();
 	return 0;
 }
@@ -30,12 +32,15 @@ void initialize(){
 	}
 	score[0] = 0;
   	score[1] = loadScore();
+  	//First time game (load score returns -1 (ERROR))
+  	if(score[1] == ERROR)
+  		score[1] = 0;
 	
 	srand(time(NULL));
 	mainwin = initscr();
 	noecho();
   	keypad(mainwin, TRUE);
-  	if (loadScore() == -1){
+  	if (loadScore() == ERROR){
   		saveScore(0);
   	}
   	printBoard(board, score);
