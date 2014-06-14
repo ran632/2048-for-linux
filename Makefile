@@ -67,7 +67,7 @@ install: all
 	@echo
 	@echo "Done. enjoy your new game - run 2048 from terminal."
 
-uninstall:
+uninstall: bclean
 	@echo "Uninstalling 2048: "	
 	@echo "Deleting ecec from /usr/bin/"
 	@sudo rm -f  /usr/bin/2048
