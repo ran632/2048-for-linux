@@ -1,21 +1,23 @@
 #include "2048.h"
 
 int main(){
+
 	while(1){
 		initialize();
 		while(1){
 			printBoard(board, score);
 			if(isGameOver())break;
-			if ('q' == (keyPress = getch())){endwin();return 0;}
+			if ('q' == (keyPress = getch()))goto endSession;
 			if(!slide(board, keyPress, score)){
 				printBoard(board, score);
-				placeNum();
+				placeNum();	
 			}
 			checkHighScore();
 		}
 		if(isUserExits())
 			break;
 	}
+	endSession:
 	endwin();
 	return 0;
 }
@@ -30,16 +32,19 @@ void initialize(){
 		}
 	}
 	score[0] = 0;
-  	score[1] = loadScore();
+	score[1] = loadScore();
+  	//First time game (load score returns -1 (ERROR))
+	if(score[1] == ERROR)
+		score[1] = 0;
 	
 	srand(time(NULL));
 	mainwin = initscr();
 	noecho();
-  	keypad(mainwin, TRUE);
-  	if (loadScore() == -1){
-  		saveScore(0);
-  	}
-  	printBoard(board, score);
+	keypad(mainwin, TRUE);
+	if (loadScore() == ERROR){
+		saveScore(0);
+	}
+	printBoard(board, score);
 	springBlock(board, 0, 0);
 	sleep(1);
 	placeNum();
@@ -47,7 +52,7 @@ void initialize(){
 }
 
 int ran(){
-  	return (rand() % (SIZE));
+	return (rand() % (SIZE));
 }
 
 void placeNum(){
@@ -79,26 +84,26 @@ int isGameOver(){
 			if (i != SIZE-1)
 				if (board[i][j] == board[i+1][j])
 					return 0;
-			if (j != SIZE-1)
-				if (board[i][j] == board[i][j+1])
-					return 0;
-		}
-	}
-	refresh();
-	sleep(2);
-	drawGameOver(score[0]);
-	return 1;
+				if (j != SIZE-1)
+					if (board[i][j] == board[i][j+1])
+						return 0;
+				}
+			}
+			refresh();
+			sleep(2);
+			drawGameOver(score[0]);
+			return 1;
 }
 
 int isUserExits(){
-	int keyPress;
-	do{
-		keyPress = getch();
-	}while(keyPress != 'c' && keyPress != 'q');
-		switch(keyPress){
-			case 'q':
-				return 1;
-			case 'c':
-				return 0;
-		}
+			int keyPress;
+			do{
+				keyPress = getch();
+			}while(keyPress != 'c' && keyPress != 'q');
+			switch(keyPress){
+				case 'q':
+					return 1;
+				case 'c':
+					return 0;
+			}
 }

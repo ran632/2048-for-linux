@@ -1,7 +1,7 @@
 #ifndef BOARD_DRAW_H
 #define BOARD_DRAW_H  
 
-#define _BSD_SOURCE
+
 
 #include <stdio.h>
 #include <unistd.h>

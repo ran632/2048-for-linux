@@ -22,7 +22,8 @@ SOURCES = $(wildcard *.c)
 
 # a macro to define the objects from sources
 BUILD_DIR := build
-OBJC=$(SOURCES:%.cpp=${BUILD_DIR}/%.o)
+BIN_DIR := bin
+OBJC=$(SOURCES:%.c=${BUILD_DIR}/%.o)
 
 # executable name
 EXECUTABLE=2048
@@ -33,7 +34,8 @@ all:	$(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJC)
 	@echo "Building target" $@
-	@$(CC) $(LDFLAGS) -o $@ $(OBJC) $(LIBS)
+	@mkdir -p $(BIN_DIR)
+	@$(CC) $(LDFLAGS) -o $(BIN_DIR)/$@ $(OBJC) $(LIBS)
 	@echo "Done."
 
 # a rule for generating object files given their c files
@@ -47,11 +49,33 @@ clean:
 	@rm -rf ${BUILD_DIR}
 	@echo "Done."
 
-bclean:
+bclean: clean
 	@echo "Ceaning all"
-	@rm -rf $(EXECUTABLE) ${BUILD_DIR}
+	@rm -rf *.dat ${BIN_DIR}
 	@echo "Done."
 
 rebuild: bclean all
+
+
+install: all
+	@echo "Installing 2048: "	
+	@echo "coping exec to /usr/bin/"
+	@sudo cp ./bin/2048 /usr/bin/
+	@mkdir -p /home/$(USER)/.2048/
+	@echo
+	@echo
+	@echo
+	@echo "Done. enjoy your new game - run 2048 from terminal."
+
+uninstall: bclean
+	@echo "Uninstalling 2048: "	
+	@echo "Deleting ecec from /usr/bin/"
+	@sudo rm -f  /usr/bin/2048
+	@rm -rf /home/$(USER)/.2048/
+	@echo
+	@echo
+	@echo
+	@echo "Done."
+
 
 
