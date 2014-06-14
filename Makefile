@@ -57,3 +57,25 @@ bclean: clean
 rebuild: bclean all
 
 
+install: all
+	@echo "Installing 2048: "	
+	@echo "coping exec to /usr/bin/"
+	@sudo cp ./bin/2048 /usr/bin/
+	@mkdir -p /home/$(USER)/.2048/
+	@echo
+	@echo
+	@echo
+	@echo "Done. enjoy your new game - run 2048 from terminal."
+
+uninstall:
+	@echo "Uninstalling 2048: "	
+	@echo "Deleting ecec from /usr/bin/"
+	@sudo rm -f  /usr/bin/2048
+	@rm -rf /home/$(USER)/.2048/
+	@echo
+	@echo
+	@echo
+	@echo "Done."
+
+
+
