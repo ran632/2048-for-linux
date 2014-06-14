@@ -80,8 +80,7 @@ void drawGameOver(int score){
 	printw("GAME OVER");
 	refresh();
 	sleep(1);
-	move(boardHeight/2 + 1,boardWidth/2 - 20);
-	printw("press 'q' to exit, any other key to continue");
+	move(boardHeight/2 + 1,boardWidth/2 - 12);
+	printw("'q' - exit | 'c' - new game");
 	refresh();
-	sleep(4);
 }

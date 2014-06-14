@@ -14,7 +14,8 @@ void initialize();
 int ran();
 void placeNum();
 void checkHighScore();
-int gameOver();
+int isGameOver();
+int isUserExits();
 
 int board[SIZE][SIZE];
 WINDOW * mainwin;

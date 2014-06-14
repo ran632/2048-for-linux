@@ -2,18 +2,19 @@
 
 int main(){
 	while(1){
-	initialize();
+		initialize();
 		while(1){
 			printBoard(board, score);
-			if(gameOver())break;
-			if ('q' == (keyPress = getch()))break;
+			if(isGameOver())break;
+			if ('q' == (keyPress = getch())){endwin();return 0;}
 			if(!slide(board, keyPress, score)){
 				printBoard(board, score);
 				placeNum();
 			}
 			checkHighScore();
 		}
-		if ('q' == (keyPress = getch()))break;
+		if(isUserExits())
+			break;
 	}
 	endwin();
 	return 0;
@@ -69,7 +70,7 @@ void checkHighScore(){
 	}
 }
 
-int gameOver(){
+int isGameOver(){
 	int i, j;
 	for (i = 0; i < SIZE; ++i){
 		for (j = 0; j < SIZE; ++j){
@@ -87,4 +88,17 @@ int gameOver(){
 	sleep(2);
 	drawGameOver(score[0]);
 	return 1;
+}
+
+int isUserExits(){
+	int keyPress;
+	do{
+		keyPress = getch();
+	}while(keyPress != 'c' && keyPress != 'q');
+		switch(keyPress){
+			case 'q':
+				return 1;
+			case 'c':
+				return 0;
+		}
 }
