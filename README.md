@@ -37,6 +37,21 @@ $ make install
 ```
 this command will build the game (just like a simple "make"), create the necessary folders, and copy the exec to the destination.
 
+Now to run it, you can open a terminal emulator and run:
+```shell
+$ 2048
+```
+from anywhere in your system.
+OR
+
+launch the game via your application launcher:
+
+ - Ubuntu unity via the Dash
+ - Gnome Shell via the app overview
+ - Cinnamon/KDE/XFCE etc via the menu
+
+**ENJOY**
+
 #### Uninstall
 so you had enough, and you just want to remove the game.
 in case you deleted the build folder (this repository clone/zip)

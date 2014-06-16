@@ -62,6 +62,9 @@ install: all
 	@echo "coping exec to /usr/bin/"
 	@sudo cp ./bin/2048 /usr/bin/
 	@mkdir -p /home/$(USER)/.2048/
+	@mkdir -p /home/$(USER)/.icons/
+	@cp ./res/2048.png /home/$(USER)/.icons/
+	@cp 2048.desktop.desktop /home/$(USER)/.local/share/applications/
 	@echo
 	@echo
 	@echo
@@ -72,6 +75,8 @@ uninstall: bclean
 	@echo "Deleting ecec from /usr/bin/"
 	@sudo rm -f  /usr/bin/2048
 	@rm -rf /home/$(USER)/.2048/
+	@rm -rf /home/$(USER)/.icons/2048.png
+	@rm -rf /home/$(USER)/.local/share/applications/2048.desktop.desktop
 	@echo
 	@echo
 	@echo
