@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=2048
+GenericName=The well known 2048 for Linux/UNIX/OSX Terminal
+Comment=The well known 2048 for Linux/UNIX/OSX Terminal
+Icon=2048.png
+Exec=2048
+NoDisplay=false
+Categories=Games;
+StartupNotify=false
+Terminal=true
+Name[en_US]=2048
